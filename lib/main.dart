@@ -34,6 +34,7 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
 
   @override
   Widget build(BuildContext context) {
+    // Création foods
     List<Food> foods = [
       Food(
         type: "starters",
@@ -99,8 +100,17 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         description:
         "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
+      Food(
+        type: "desserts",
+        title: "Glace.",
+        imageFilepath: "assets/images/profile.png",
+        price: 20.00,
+        description:
+        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+      ),
     ];
 
+    // Affichage
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -143,47 +153,40 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
             ),
           ),
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: ListView.builder(
-                      itemCount: foods.length,
-                      itemBuilder: (context, index) {
-                        print(foods[index].title );
-                        if (foods[index].type == _value ) {
-                          return Card(
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Text(foods[index].title),
-                                  SizedBox(height: 10),
-                                  CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: AssetImage(
-                                      foods[index].imageFilepath,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text("Prix : ${foods[index].price} €"),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "Description : \n${foods[index].description}",
-                                  ),
-                                ],
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: ListView.builder(
+                itemCount: foods.length,
+                itemBuilder: (context, index) {
+                  if (foods[index].type == _value ) {
+                    return Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Text(foods[index].title),
+                            SizedBox(height: 10),
+                            CircleAvatar(
+                              radius: 20,
+                              backgroundImage: AssetImage(
+                                foods[index].imageFilepath,
                               ),
                             ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ],
+                            SizedBox(height: 10),
+                            Text("Prix : ${foods[index].price} €"),
+                            SizedBox(height: 10),
+                            Text(
+                              "Description : \n${foods[index].description}",
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  } else {
+                    return null;
+                  }
+                },
+              ),
             ),
           ),
         ],
@@ -191,6 +194,8 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
     );
   }
 }
+
+// Classe nourriture
 class Food {
   String title = "";
   String imageFilepath = "";
