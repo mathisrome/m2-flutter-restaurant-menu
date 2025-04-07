@@ -74,7 +74,7 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         imageFilepath: "assets/images/profile.png",
         price: 20.00,
         description:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
       Food(
         type: "plates",
@@ -82,7 +82,7 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         imageFilepath: "assets/images/profile.png",
         price: 20.00,
         description:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
       Food(
         type: "desserts",
@@ -90,7 +90,7 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         imageFilepath: "assets/images/profile.png",
         price: 20.00,
         description:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
       Food(
         type: "desserts",
@@ -98,7 +98,7 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         imageFilepath: "assets/images/profile.png",
         price: 20.00,
         description:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
       Food(
         type: "desserts",
@@ -106,9 +106,12 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
         imageFilepath: "assets/images/profile.png",
         price: 20.00,
         description:
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.",
       ),
     ];
+
+    List<Food> filteredFoods =
+        foods.where((food) => food.type == _value).toList();
 
     // Affichage
     return Scaffold(
@@ -156,35 +159,30 @@ class _RestaurantMenuState extends State<RestaurantMenu> {
             child: Padding(
               padding: EdgeInsets.all(20),
               child: ListView.builder(
-                itemCount: foods.length,
+                itemCount: filteredFoods.length,
                 itemBuilder: (context, index) {
-                  if (foods[index].type == _value ) {
-                    return Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Text(foods[index].title),
-                            SizedBox(height: 10),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundImage: AssetImage(
-                                foods[index].imageFilepath,
-                              ),
+                  final food = filteredFoods[index];
+                  return Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Text(food.title),
+                          SizedBox(height: 10),
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundImage: AssetImage(
+                              food.imageFilepath,
                             ),
-                            SizedBox(height: 10),
-                            Text("Prix : ${foods[index].price} €"),
-                            SizedBox(height: 10),
-                            Text(
-                              "Description : \n${foods[index].description}",
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: 10),
+                          Text("Prix : ${food.price} €"),
+                          SizedBox(height: 10),
+                          Text("Description : \n${food.description}"),
+                        ],
                       ),
-                    );
-                  } else {
-                    return null;
-                  }
+                    ),
+                  );
                 },
               ),
             ),
